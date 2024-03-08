@@ -1,9 +1,19 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 export default function FormPage() {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const navigate = useNavigate();
+
+  const onSubmit = data => {
+    // Salva os dados no localStorage
+    localStorage.setItem('formData', JSON.stringify(data));
+
+    // Redireciona para a outra página
+    navigate.push('/answers');
+  };
+
   console.log(errors);
 
   return (
