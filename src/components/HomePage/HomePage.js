@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 
 import './HomePage.css'; // Estilo do carrossel
@@ -19,17 +18,22 @@ const HomePage = () => {
   return (
     
     <div>
-      <h1>Bem-vindo à Página Inicial</h1>
+      <h2>Que tal adotar um gatinho?</h2>
 
       {/* Carrossel */}
       <Slider {...settings}>
         <div>
-          <img src="../public/img/cat1.jpg" alt="Imagem 1" />
+          <img src="img/cat1.jpg" alt="Gatinho 1" width={600} height={332} />
         </div>
         <div>
-          <img src="imagem2.jpg" alt="Imagem 2" />
+          <img src="img/cat2.jpg" alt="Gatinho 2" width={600} height={332} />
         </div>
-        {/* Adicione mais slides conforme necessário */}
+        <div>
+          <img src="img/cat3.jpg" alt="Gatinho 3" width={600} height={332} />
+        </div>
+        <div>
+          <img src="img/cat4.jpg" alt="Gatinho 4" width={600} height={332} />
+        </div>
       </Slider>
 
     </div>

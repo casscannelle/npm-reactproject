@@ -1,15 +1,10 @@
 /* HomePage.css */
 .slick-slider {
-    width: 80%;
+    width: 600px;
+    height: 332px;
     margin: 0 auto;
   }
-  
-  .slick-prev,
-  .slick-next {
-    font-size: 24px;
-    color: #000;
-  }
-  
+     
   .slick-dots {
     bottom: 10px;
   }
@@ -18,4 +13,6 @@
     font-size: 12px;
     color: #000;
   }
+
+  
   
