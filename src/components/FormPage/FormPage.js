@@ -1,22 +1,25 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '@mui/material/Button';	
+import Button from '@mui/material/Button';
 
 const FormPage = () => {
-  
-
-  // Estados para armazenar os dados do formulário
   const [nome, setNome] = useState('');
   const [email, setEmail] = useState('');
   const [temGatos, setTemGatos] = useState('');
 
-  // Função para manipular o envio do formulário
-  
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Redireciona as respostas para a AnswersPage
+    navigate('/answers', { state: { nome, email, temGatos } });
+  };
 
   return (
     <div className='container-form'>
       <h2>Formulário</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>
           Nome:
           <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
@@ -54,11 +57,9 @@ const FormPage = () => {
         </label>
         <br />
 
-       
-      <Button variant="contained" color="secondary">
-        Enviar
-      </Button>
-    
+        <Button variant="contained" color="secondary" type="submit">
+          Enviar
+        </Button>
       </form>
     </div>
   );
