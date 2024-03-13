@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import IconLabelButtons from '../Button/Button';
+import Button from '@mui/material/Button';	
 
 const FormPage = () => {
-  const navigate = useNavigate();
+  
 
   // Estados para armazenar os dados do formulário
   const [nome, setNome] = useState('');
@@ -11,24 +11,12 @@ const FormPage = () => {
   const [temGatos, setTemGatos] = useState('');
 
   // Função para manipular o envio do formulário
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Validação básica
-    if (nome.length < 3) {
-      alert('O nome deve ter pelo menos 3 caracteres.');
-      return;
-    }
-
-
-    // Redireciona as respostas para a AnswersPage
-    navigate.push('/answers');
-  };
+  
 
   return (
     <div className='container-form'>
       <h2>Formulário</h2>
-      <form onSubmit={handleSubmit}>
+      <form>
         <label>
           Nome:
           <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
@@ -66,7 +54,11 @@ const FormPage = () => {
         </label>
         <br />
 
-        <IconLabelButtons />
+       
+      <Button variant="contained" color="secondary">
+        Enviar
+      </Button>
+    
       </form>
     </div>
   );
