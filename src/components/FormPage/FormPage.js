@@ -12,8 +12,14 @@ const FormPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // Console para verificar
+    console.log('Nome:', nome);
+    console.log('E-mail:', email);
+    console.log('Tem gatos?:', temGatos);
+
     // Redireciona as respostas para a AnswersPage
     navigate('/answers', { state: { nome, email, temGatos } });
+    alert('Formulário enviado com sucesso!');
   };
 
   return (

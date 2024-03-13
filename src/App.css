@@ -69,7 +69,8 @@ h3 {
   background: #ffffff;
   border-radius: 15px;
   padding: 25px 25px;
-  margin-top: 5%;
+  margin: auto;
+  margin-top: 25px;
 }
 
 .container-wrapper {
