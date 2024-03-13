@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
-export default function AnswerPage() {
+const AnswerPage = () => {
   const [allResponses, setAllResponses] = useState([]);
-  const [lastResponse, setLastResponse] = useState({});
 
   useEffect(() => {
     const updateResponses = () => {
       const formData = JSON.parse(localStorage.getItem('formData')) || {};
 
-    
-
       // Verificar se a última resposta é diferente
-      if (JSON.stringify(lastResponse) !== JSON.stringify(formData) && Object.keys(formData).length !== 0) {
+      if (Object.keys(formData).length !== 0) {
         // Verificar se a resposta não está na lista
         const isResponseAlreadyAdded = allResponses.some((response) => {
           return JSON.stringify(response) === JSON.stringify(formData);
@@ -23,9 +20,6 @@ export default function AnswerPage() {
           // Exibir os dados no console
           console.log('Nova resposta:', formData);
         }
-
-        // Atualizar o estado da última resposta
-        setLastResponse(formData);
       }
     };
 
@@ -36,7 +30,7 @@ export default function AnswerPage() {
     return () => {
       window.removeEventListener('storage', updateResponses);
     };
-  }, [lastResponse]);
+  }, [allResponses]);
 
   return (
     <div>
@@ -52,4 +46,6 @@ export default function AnswerPage() {
       ))}
     </div>
   );
-}
+};
+
+export default AnswerPage;
