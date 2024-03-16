@@ -1,51 +1,45 @@
 import React, { useState, useEffect } from 'react';
 
 const AnswerPage = () => {
-  const [allResponses, setAllResponses] = useState([]);
+ const [responses, setResponses] = useState([]);
 
-  useEffect(() => {
-    const updateResponses = () => {
-      const formData = JSON.parse(localStorage.getItem('formData')) || {};
+ useEffect(() => {
+  const updateResponse = () => {
+   const formData = JSON.parse(localStorage.getItem('formData')) || {};
+   const storedResponses = JSON.parse(localStorage.getItem('formResponses')) || [];
 
-      // Verificar se a última resposta é diferente
-      if (Object.keys(formData).length !== 0) {
-        // Verificar se a resposta não está na lista
-        const isResponseAlreadyAdded = allResponses.some((response) => {
-          return JSON.stringify(response) === JSON.stringify(formData);
-        });
+   if (Object.keys(formData).length !== 0) {
+    const isNewResponse = !storedResponses.some(response => JSON.stringify(response) === JSON.stringify(formData));
 
-        if (!isResponseAlreadyAdded) {
-          setAllResponses((prevResponses) => [...prevResponses, formData]);
+    if (isNewResponse) {
+     const updatedResponses = [...storedResponses, formData];
+     localStorage.setItem('formResponses', JSON.stringify(updatedResponses));
+     setResponses(updatedResponses);
+    }
+   }
+  };
 
-          // Exibir os dados no console
-          console.log('Nova resposta:', formData);
-        }
-      }
-    };
+  updateResponse();
 
-    updateResponses();
+  window.addEventListener('storage', updateResponse);
 
-    window.addEventListener('storage', updateResponses);
+  return () => {
+   window.removeEventListener('storage', updateResponse);
+  };
+ }, []);
 
-    return () => {
-      window.removeEventListener('storage', updateResponses);
-    };
-  }, [allResponses]);
-
-  return (
-    <div>
-      <h2>Quem já se cadastrou</h2>
-      {allResponses.map((response, index) => (
-        <div key={index}>
-          <div className='container-answer'>
-            <p>Nome: {response.nome}</p>
-            <p>E-mail: {response.email}</p>
-            <p>Já tem gatos: {response.temGatos}</p>
-          </div>
-        </div>
-      ))}
+ return (
+  <div>
+   <h2>Quem já se cadastrou</h2>
+   {responses.map((response, index) => (
+    <div key={index} className='container-answer'>
+     <p>Nome: {response.nome}</p>
+     <p>E-mail: {response.email}</p>
+     <p>Já tem gatos: {response.temGatos}</p>
     </div>
-  );
+   ))}
+  </div>
+ );
 };
 
 export default AnswerPage;
